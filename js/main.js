@@ -61,17 +61,34 @@ $(function () {
 
 
 //푸터타이핑
+// $(function () {
+//     let mescroll = false;
+//     $(window).scroll(function () {
+//         if ($(window).scrollTop() + $(window).height() >= $('footer').offset().top && !mescroll) {
+//             typing();
+//             mescroll = true;
+//         } else if ($(window).scrollTop() + $(window).height() < $('footer').offset().top) {
+//             mescroll = false;
+//         }
+//     })
+// })
 $(function () {
     let mescroll = false;
+
     $(window).scroll(function () {
-        if ($(window).scrollTop() + $(window).height() >= $('footer').offset().top && !mescroll) {
+        // 푸터의 높이를 구합니다.
+        let footerHeight = $('footer').outerHeight();
+        // 실행 기준점: 푸터의 시작점 + 푸터 높이의 절반
+        let triggerPoint = $('footer').offset().top + (footerHeight / 2);
+
+        if ($(window).scrollTop() + $(window).height() >= triggerPoint && !mescroll) {
             typing();
             mescroll = true;
-        } else if ($(window).scrollTop() + $(window).height() < $('footer').offset().top) {
+        } else if ($(window).scrollTop() + $(window).height() < triggerPoint) {
             mescroll = false;
         }
-    })
-})
+    });
+});
 
 function typing() {
     const h1 = document.querySelector('.lastsection .lastinner h1')
